@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const containerStyles = {
   display: "flex",
@@ -39,10 +39,13 @@ const buttonStyles = {
 };
 
 const UploadProduct = () => {
+  const { userId } = useParams();
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [details, setDetails] = useState("");
   const [image, setImage] = useState(null);
+
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -52,17 +55,18 @@ const UploadProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("title", title);
+    formData.append("productTitle", title);
     formData.append("price", price);
-    formData.append("details", details);
-    formData.append("image", image);
+    formData.append("productDetails", details);
+    formData.append("productImage", image);
 
-    axios.post("https://api.example.com/products", formData, {
+    axios.post(`https://serverside-w1cb.onrender.com/products/upload-product/${userId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then(response => {
       console.log(response.data);
-      navigate("/all-products");
+      alert("product added")
+      navigate("/products");
     })
     .catch(error => console.error(error));
   };

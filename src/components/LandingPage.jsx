@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 
 const containerStyles = {
   textAlign: "center",
@@ -51,6 +51,7 @@ const uploadButtonStyles = {
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const {userId} = useParams()
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -60,7 +61,7 @@ const LandingPage = () => {
           <button style={signupButtonStyles} onClick={() => navigate("/sign-up")}>
             Sign Up
           </button>
-          <button style={uploadButtonStyles} onClick={() => navigate("/upload")}>
+          <button style={uploadButtonStyles} onClick={() => navigate(`/upload/${userId}`)}>
             Upload Product
           </button>
         </div>
@@ -73,5 +74,5 @@ const LandingPage = () => {
     </div>
   );
 };
-
+//679e12e07e56cbad5d173296
 export default LandingPage;

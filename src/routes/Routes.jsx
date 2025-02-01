@@ -21,20 +21,14 @@ export const Elements = createBrowserRouter([
         <Products />
   
     },
-    // {
-    //   path: "/products/:id",
-    //   element: 
-   
-    //     < ProductDetails/>
-  
-    // },
+    
 
       {
         path:"/sign-up",
         element: <SignUp/>
       },
       {
-        path:"/upload",
+        path:"/upload/:userId",
         element: <UploadProduct/>
       },
 

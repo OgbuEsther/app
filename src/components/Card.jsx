@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bag from "../assets/bag3.jpg";
+import axios from "axios";
 
 const cardStyles = {
   width: "320px",
@@ -63,21 +64,39 @@ const buttonStyles = {
 };
 
 const Card = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://serverside-w1cb.onrender.com/products/get-all-product")
+      .then((response) => {
+        // console.log(response)
+        setProducts(response.data.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div style={cardStyles}>
+   <div>
+
+     {products?.map(product => <div key={product?._id} style={cardStyles}>
+
       <div style={imageContainerStyles}>
-        <img style={imgStyles} src={bag} alt="Product" />
+        <img style={imgStyles} src={product?.productImage} alt="Product" />
       </div>
+
       <div style={contentStyles}>
+        
         <h3 style={titleStyles}>
-          Product Title <span style={priceStyles}>$99</span>
+         {product?.productTitle} <span style={priceStyles}>${product?.price}</span>
         </h3>
         <p style={descStyles}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+       {product?.productDetails}
         </p>
         <button style={buttonStyles}>Add to Cart</button>
       </div>
-    </div>
+    </div>)}
+   </div>
+    
   );
 };
 

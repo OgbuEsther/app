@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const containerStyles = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  width : "100vw",
+  width: "100vw",
   backgroundColor: "#f4f6f9",
 };
 
@@ -37,15 +39,63 @@ const buttonStyles = {
 };
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const {userId} = useParams()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("https://serverside-w1cb.onrender.com/user/new-users", {
+        name,
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response.data.data._id)
+        alert(response.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        navigate(`/upload/${response.data.data._id}`);
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div style={containerStyles}>
       <div style={formContainerStyles}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Sign Up</h2>
-        <form>
-          <input style={inputStyles} type="text" placeholder="Enter your name" />
-          <input style={inputStyles} type="email" placeholder="Enter your email" />
-          <input style={inputStyles} type="password" placeholder="Enter your password" />
-          <button style={buttonStyles} type="submit">Sign Up</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            style={inputStyles}
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            style={inputStyles}
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            style={inputStyles}
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button style={buttonStyles} type="submit">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>
