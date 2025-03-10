@@ -39,8 +39,10 @@ const buttonStyles = {
 };
 
 const SignUp = () => {
+
   const navigate = useNavigate();
   const {userId} = useParams()
+  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

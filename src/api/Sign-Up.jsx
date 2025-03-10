@@ -45,7 +45,6 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post("https://my-todos-app-z06s.onrender.com/user/new-user", {
         name,

@@ -10,10 +10,10 @@ const App = () => {
   return (
     <div>
       {/* <Counter /> */}
-      {/* <RouterProvider router={Elements} /> */}
-      <GetAllUsers />
+      <RouterProvider router={Elements} />
+      {/* <GetAllUsers />
       <SignUp />
-      hello world
+      hello world */}
     </div>
   );
 };
