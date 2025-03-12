@@ -39,7 +39,7 @@ const buttonStyles = {
 };
 
 const UploadProduct = () => {
-  const { userId } = useParams();
+  const { userId } = useParams(); //it allows you get the id from the url 
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");

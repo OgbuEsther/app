@@ -6,30 +6,22 @@ import LandingPage from "../components/LandingPage";
 import ProductDetails from "../components/ProductDetails";
 
 export const Elements = createBrowserRouter([
-    {
-        path: "/",
-        element: 
-     
-          <LandingPage />
-    
-      },
-  
-    {
-      path: "/products",
-      element: 
-   
-        <Products />
-  
-    },
-    
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
 
-      {
-        path:"/sign-up",
-        element: <SignUp/>
-      },
-      {
-        path:"/upload/:userId",
-        element: <UploadProduct/>
-      },
+  {
+    path: "/products",
+    element: <Products />,
+  },
 
-    ])
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
+  {
+    path: "/upload/:userId",
+    element: <UploadProduct />,
+  },
+]);
