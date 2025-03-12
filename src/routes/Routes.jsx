@@ -4,6 +4,7 @@ import Products from "../components/Products";
 import UploadProduct from "../components/UploadProduct";
 import LandingPage from "../components/LandingPage";
 import ProductDetails from "../components/ProductDetails";
+import Card from "../components/Card";
 
 export const Elements = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const Elements = createBrowserRouter([
 
   {
     path: "/products",
-    element: <Products />,
+    element: <Card />,
   },
 
   {

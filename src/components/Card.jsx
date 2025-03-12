@@ -13,6 +13,7 @@ const cardStyles = {
   overflow: "hidden",
   margin: "16px",
   transition: "transform 0.3s ease-in-out",
+
 };
 
 const imageContainerStyles = {
@@ -74,35 +75,53 @@ const Card = () => {
     axios
       .get("https://serverside-w1cb.onrender.com/products/get-all-product")
       .then((response) => {
-        // console.log(response)
         setProducts(response.data.data);
       })
       .catch((error) => console.error(error));
   }, []);
 
   return (
-   <div>
+    <div
+      style={{
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "16px",
+        padding: "20px",
+        maxWidth: "100%", 
+        overflowX: "hidden",
+        boxSizing: "border-box",
+      }}
+    >
+      {products?.map((product) => (
+        <div key={product?._id} style={cardStyles}>
+          <div style={imageContainerStyles}>
+            <img style={imgStyles} src={product?.productImage} alt="Product" />
+          </div>
 
-     {products?.map(product => <div key={product?._id} style={cardStyles}>
-
-      <div style={imageContainerStyles}>
-        <img style={imgStyles} src={product?.productImage} alt="Product" />
-      </div>
-
-      <div style={contentStyles}>
-        
-        <h3 style={titleStyles}>
-         {product?.productTitle} <span style={priceStyles}>${product?.price}</span> <span style={priceStyles}>cart : {count}</span>
-        </h3>
-        <p style={descStyles}>
-       {product?.productDetails}
-        </p>
-        <button onClick={() => dispatch(increment())} style={buttonStyles}>Add to Cart</button>
-      </div>
-    </div>)}
-   </div>
-    
+          <div style={contentStyles}>
+            <h3 style={titleStyles}>
+              {product?.productTitle}{" "}
+              <span style={priceStyles}>${product?.price}</span>{" "}
+              <span style={priceStyles}>cart: {count}</span>
+            </h3>
+            <p style={descStyles}>{product?.productDetails}</p>
+            <button
+              onClick={() => dispatch(increment())}
+              style={buttonStyles}
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
 export default Card;
+
+
