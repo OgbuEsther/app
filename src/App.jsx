@@ -11,6 +11,7 @@ const App = () => {
     <div>
       {/* <Counter /> */}
       <RouterProvider router={Elements} />
+      {/* <Counter /> */}
       {/* <GetAllUsers />
       <SignUp />
       hello world */}

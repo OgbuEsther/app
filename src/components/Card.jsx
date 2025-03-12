@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import bag from "../assets/bag3.jpg";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { increment } from "../store/counterSlice";
 
 const cardStyles = {
   width: "320px",
@@ -65,6 +67,9 @@ const buttonStyles = {
 
 const Card = () => {
   const [products, setProducts] = useState([]);
+  const count = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     axios
       .get("https://serverside-w1cb.onrender.com/products/get-all-product")
@@ -87,12 +92,12 @@ const Card = () => {
       <div style={contentStyles}>
         
         <h3 style={titleStyles}>
-         {product?.productTitle} <span style={priceStyles}>${product?.price}</span>
+         {product?.productTitle} <span style={priceStyles}>${product?.price}</span> <span style={priceStyles}>cart : {count}</span>
         </h3>
         <p style={descStyles}>
        {product?.productDetails}
         </p>
-        <button style={buttonStyles}>Add to Cart</button>
+        <button onClick={() => dispatch(increment())} style={buttonStyles}>Add to Cart</button>
       </div>
     </div>)}
    </div>
